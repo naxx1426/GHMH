@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盲盒论坛</title>
+</head>
+<style>
+    body {text-align: center}
+</style>
+<body>
+    <h1 style="color: green">论坛盲盒</h1>
+    <p style="color: green">性别：</p>
+    <input type="radio" name="select_gender" value="0" checked/>所有
+    <input type="radio" name="select_gender" value="1"/>男
+    <input type="radio" name="select_gender" value="2"/>女<br />
+    {% for a in boy_list %}
+        {% if a.boxdetail.gender == '1' %}
+            <p style="color: green">姓名：{{ a.boxdetail.name }}</p>
+            <p style="color: green">年龄：{{ a.boxdetail.age }}</p>
+            <p style="color: green">地区：{{ a.boxdetail.region }}</p>
+            <form action="/detail/" method="post">
+                {% csrf_token %}
+                <input type = "hidden" name = "id" value="{{ a.boxdetail.id }}" readonly/>
+                <input type = "hidden" name = "way" value= "detail" readonly/>
+                <input type = "submit" value = "详细内容">
+            </form>
+        {% endif %}
+    {% endfor %}
+    <br/><button onclick = "window.location.href = 'http://127.0.0.1:8000/'">退出</button>
+<script>
+    setInterval('judge()', 500);
+</script>
+</body>
+</html>
